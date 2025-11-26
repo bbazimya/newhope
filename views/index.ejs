@@ -1,0 +1,65 @@
+<section class="hero">
+  <div class="hero-text">
+    <h1>We are the Best Behavioral Residential Facility</h1>
+    <p class="tagline">
+      We are a young company driven with compassion and professionalism to support adults who are in need to
+      achieve their full independence and go back to active life in the shortest time possible.
+    </p>
+    <p>
+      Our residents receive 24/7 support in a safe, loving, and structured environment in El Mirage, Arizona.
+      We partner with families, providers, and the community to help each individual build independent living
+      skills and long-term wellness.
+    </p>
+    <div class="hero-badges">
+      <span class="badge">24/7 Resident Care</span>
+      <span class="badge">Dedicated, Qualified Team</span>
+      <span class="badge">Life Skills & Rehabilitation</span>
+    </div>
+    <p style="margin-top:1rem;">
+      <a class="btn" href="/register">Request Admission</a>
+      <a class="btn secondary" href="/services">View Services</a>
+    </p>
+  </div>
+  <div class="hero-image"></div>
+</section>
+
+<section class="grid">
+  <article class="card">
+    <h2>Why Choose Us</h2>
+    <p>
+      We provide a supportive, loving environment in which residents and staff help each other, understand each
+      other and work together to achieve results in a very efficient way.
+    </p>
+  </article>
+  <article class="card">
+    <h2>Our Mission</h2>
+    <p>
+      To support adults with behavioral health needs to regain independence, dignity, and hope through
+      compassionate, individualized residential care.
+    </p>
+  </article>
+  <article class="card">
+    <h2>Our Vision</h2>
+    <p>
+      A community where every person living with behavioral health challenges has access to a safe home,
+      supportive relationships, and meaningful opportunities.
+    </p>
+  </article>
+</section>
+
+<section class="card">
+  <h2>Latest Announcements</h2>
+  <% if (announcements.length === 0) { %>
+    <p>No announcements at this time. Please check back later.</p>
+  <% } else { %>
+    <div class="stack">
+      <% announcements.forEach(a => { %>
+        <div class="announcement">
+          <strong><%= a.title %></strong>
+          <p><%= a.content %></p>
+          <small>Posted on <%= a.createdAt.toLocaleString() %></small>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
