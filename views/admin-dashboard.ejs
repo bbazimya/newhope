@@ -1,0 +1,88 @@
+<section class="grid">
+  <article class="card">
+    <h2>Admin Dashboard</h2>
+    <p>You are signed in as <strong><%= currentUser.email %></strong>.</p>
+    <form method="POST" action="/logout" style="margin-top:0.8rem;">
+      <button class="btn secondary" type="submit">Sign Out</button>
+    </form>
+  </article>
+  <article class="card">
+    <h2>Post Announcement</h2>
+    <form method="POST" action="/admin/announcements">
+      <label>Title</label>
+      <input type="text" name="title" required />
+      <label>Content</label>
+      <textarea name="content" required></textarea>
+      <div class="actions">
+        <button class="btn" type="submit">Publish</button>
+      </div>
+    </form>
+  </article>
+</section>
+
+<section class="card">
+  <h2>Current Announcements</h2>
+  <% if (announcements.length === 0) { %>
+    <p>No announcements posted.</p>
+  <% } else { %>
+    <div class="stack">
+      <% announcements.forEach(a => { %>
+        <div class="announcement">
+          <strong><%= a.title %></strong>
+          <p><%= a.content %></p>
+          <small>Posted on <%= a.createdAt.toLocaleString() %></small>
+          <form method="POST" action="/admin/announcements/<%= a.id %>/delete" style="margin-top:0.3rem;">
+            <button class="btn danger" type="submit">Delete</button>
+          </form>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
+<section class="card">
+  <h2>Patient Records</h2>
+  <% if (patients.length === 0) { %>
+    <p>No patient records yet.</p>
+  <% } else { %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Status</th>
+          <th>Reason</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% patients.forEach(p => { %>
+          <tr>
+            <td><%= p.id %></td>
+            <td><%= p.fullName %></td>
+            <td><%= p.phone || '' %></td>
+            <td>
+              <% let sClass = 'pending'; if (p.status === 'Admitted') sClass='admitted'; if (p.status === 'Discharged') sClass='discharged'; %>
+              <span class="pill <%= sClass.toLowerCase() %>"><%= p.status %></span>
+            </td>
+            <td><%= p.reason ? p.reason.substring(0,80) : '' %></td>
+            <td>
+              <form method="POST" action="/admin/patients/<%= p.id %>/status" style="margin-bottom:0.3rem;">
+                <select name="status">
+                  <option value="Pending admission" <%= p.status === 'Pending admission' ? 'selected' : '' %>>Pending</option>
+                  <option value="Admitted" <%= p.status === 'Admitted' ? 'selected' : '' %>>Admitted</option>
+                  <option value="Discharged" <%= p.status === 'Discharged' ? 'selected' : '' %>>Discharged</option>
+                </select>
+                <button class="btn" type="submit">Update</button>
+              </form>
+              <form method="POST" action="/admin/patients/<%= p.id %>/delete">
+                <button class="btn danger" type="submit" onclick="return confirm('Remove this patient and account?');">Remove</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>

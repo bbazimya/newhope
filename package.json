@@ -1,0 +1,14 @@
+{
+  "name": "newhope-behavioral-residential",
+  "version": "1.0.0",
+  "description": "New Hope Behavioral Residential LLC website with patient and admin dashboards",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "ejs": "^3.1.10"
+  }
+}

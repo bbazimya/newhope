@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Hope Behavioral Residential, LLC</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span>🕊️</span>
+      <div>
+        <div>NEW HOPE</div>
+        <small>Behavioral Residential, LLC</small>
+      </div>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">Why Choose Us</a>
+      <a href="/services">Our Services</a>
+      <a href="/contact">Contact</a>
+      <% if (!currentUser) { %>
+        <a href="/register">Patient Register</a>
+        <a href="/login">Sign In</a>
+      <% } else if (currentUser.role === 'patient') { %>
+        <a href="/patient/dashboard">My Dashboard</a>
+      <% } else if (currentUser.role === 'admin') { %>
+        <a href="/admin/dashboard">Admin</a>
+      <% } %>
+    </nav>
+  </header>
+  <main>
+    <%- include(view); %>
+  </main>
+  <footer>
+    <div>LICENSE: BH8035 · New Hope Behavioral Residential, LLC</div>
+    <div>Phone: 602-545-6580 · 623-600-8683 · Email: newhopehj36@gmail.com</div>
+    <div>Address: 12514 W Willow Ave, El Mirage, AZ 85335, USA</div>
+  </footer>
+</body>
+</html>

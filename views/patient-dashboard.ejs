@@ -1,0 +1,48 @@
+<section class="grid">
+  <article class="card">
+    <h2>Welcome, <%= patient ? patient.fullName : currentUser.name %></h2>
+    <% if (patient) { %>
+      <p>Your admission status:</p>
+      <p>
+        <% let sClass = 'pending'; if (patient.status === 'Admitted') sClass='admitted'; if (patient.status === 'Discharged') sClass='discharged'; %>
+        <span class="pill <%= sClass.toLowerCase() %>"><%= patient.status %></span>
+      </p>
+      <p style="margin-top:0.8rem;">
+        <strong>Contact details on file</strong><br/>
+        Phone: <%= patient.phone || 'Not provided' %><br/>
+        Address: <%= patient.address || 'Not provided' %>
+      </p>
+      <p style="margin-top:0.8rem;">
+        <strong>Admission notes:</strong><br/>
+        <%= patient.reason || 'No notes provided.' %>
+      </p>
+    <% } else { %>
+      <p>We could not find your patient record. Please contact the facility.</p>
+    <% } %>
+  </article>
+
+  <article class="card">
+    <h2>Account</h2>
+    <p>You are signed in as <strong><%= currentUser.email %></strong>.</p>
+    <form method="POST" action="/logout" style="margin-top:0.8rem;">
+      <button class="btn secondary" type="submit">Sign Out</button>
+    </form>
+  </article>
+</section>
+
+<section class="card">
+  <h2>Announcements</h2>
+  <% if (!announcements || announcements.length === 0) { %>
+    <p>No announcements at this time.</p>
+  <% } else { %>
+    <div class="stack">
+      <% announcements.forEach(a => { %>
+        <div class="announcement">
+          <strong><%= a.title %></strong>
+          <p><%= a.content %></p>
+          <small>Posted on <%= a.createdAt.toLocaleString() %></small>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</section>

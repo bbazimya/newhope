@@ -1,0 +1,20 @@
+<section class="card form-card">
+  <h2>Sign In</h2>
+  <p>Please sign in to access your dashboard.</p>
+  <form method="POST" action="/login">
+    <label>Email</label>
+    <input type="email" name="email" required />
+    <label>Password</label>
+    <input type="password" name="password" required />
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+    <div class="actions">
+      <button class="btn" type="submit">Sign In</button>
+    </div>
+  </form>
+  <p style="margin-top:1rem; font-size:0.9rem;">
+    New here? <a href="/register">Create a patient account</a>.<br/>
+    Admin demo login: <code>admin@newhope.com / admin123</code>
+  </p>
+</section>
